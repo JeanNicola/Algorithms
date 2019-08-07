@@ -1,0 +1,18 @@
+function quickSort(array) {
+  
+  if (array.length <= 1) return array;
+  
+  var pivotIndex = (Math.round(array.length / 2) - 1);
+  var pivot = array[pivotIndex];
+  var lessThanPivot = [];
+  var greaterThanPivot = [];
+  
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] < pivot) lessThanPivot.push(array[i]);
+    if (array[i] > pivot) greaterThanPivot.push(array[i]);
+    if (array[i] === pivot && i !== pivotIndex) lessThanPivot.push(array[i]);
+
+  }
+  
+  return [...quickSort(lessThanPivot), pivot, ...quickSort(greaterThanPivot)];
+}

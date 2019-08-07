@@ -1,0 +1,46 @@
+
+function permAlone(str) {
+  
+  var array = str.split('');
+  var permutations = heapFunction(array.length, array, []);
+  
+  permutations = permutations.filter(function(string) {
+    return !string.match(/(.)\1+/);
+  });
+  
+  return permutations.length;
+  
+}
+
+function swap(index1, index2, array) {
+  var temp = array[index1];
+  array[index1] = array[index2];
+  array[index2] = temp;
+  return array;
+}
+
+function heapFunction(integer, array, permutations) {
+  
+  if (integer === 1) {
+    permutations.push(array.join(''))
+  } else {
+    
+    for (var i = 0; i < integer; i++) {
+      heapFunction(integer - 1, array, permutations);
+      if (integer % 2 === 0) {
+        array = swap(i, integer - 1, array)
+      }
+      if (integer % 2 !== 0) {
+        array = swap(0, integer - 1, array, permutations)
+      }
+    }
+    
+  }
+  
+  return permutations;
+ 
+}
+  
+
+permAlone('aab');
+

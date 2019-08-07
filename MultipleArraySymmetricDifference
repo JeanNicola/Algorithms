@@ -1,0 +1,66 @@
+function sym(args) {
+  
+  var values = {};
+  var argumentsArr = Object.values(arguments)
+  var symmetricDifference = argumentsArr[0];
+  
+  for (var i = 1; i < argumentsArr.length;i++) {
+    
+    for (let j = 0; j < symmetricDifference.length;j++) {
+      if (!values[symmetricDifference[j]]) values[symmetricDifference[j]] = i;
+    }
+    
+    for (let j = 0; j < argumentsArr[i].length;j++) {
+      if (!values[argumentsArr[i][j]]) values[argumentsArr[i][j]] = i + 1;
+      if (values[argumentsArr[i][j]] === i) values[argumentsArr[i][j]] = "filter"
+    }
+    
+    symmetricDifference = []
+    
+    for (var key in values) {
+      if (values[key] !== "filter") symmetricDifference.push(parseInt(key));
+    }
+    
+    values = {}
+    
+  }
+  
+  return symmetricDifference;
+}
+
+sym([1, 2, 5], [2, 3, 5], [3, 4, 5]);
+
+
+
+
+///////////////////////////// SECOND SOLUTION
+
+
+function sym(args) {
+  
+  var values = {};
+  var argumentsArr = Object.values(arguments)
+  var symmetricDifference = argumentsArr[0];
+  
+  for (var i = 1; i < argumentsArr.length;i++) {
+    
+    for (let j = 0; j < argumentsArr[i].length; j++) {
+      if (!symmetricDifference.includes(argumentsArr[i][j])) {
+        values[argumentsArr[i][j]] = "unique";
+      }
+    }
+    
+    for (let j = 0; j < symmetricDifference.length; j++) {
+      if (!arguments[i].includes(symmetricDifference[j])) {
+        values[symmetricDifference[j]] = "unique";
+      }
+    }
+
+    symmetricDifference = Object.keys(values).map(num => parseInt(num));
+    values = {}
+  }
+
+  return symmetricDifference;
+}
+
+sym([1, 2, 5], [2, 3, 5], [3, 4, 5]);

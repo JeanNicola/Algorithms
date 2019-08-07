@@ -1,0 +1,24 @@
+function sumPrimes(num) {
+  
+  if (num <= 1) return 0;
+  
+  var actualNumber = 2;
+  var possibleDividers = [];
+  var sum = 0;
+  
+  while (actualNumber <= num) {
+    possibleDividers.push(actualNumber);
+    var dividersCount = 0;
+    for (var i = 0; i < possibleDividers.length; i++) {
+      if (actualNumber % possibleDividers[i] === 0) {
+        dividersCount++;
+      }
+    }
+    if (dividersCount === 1) sum += actualNumber;
+    actualNumber++
+  }
+  
+  return sum;
+}
+
+sumPrimes(977)

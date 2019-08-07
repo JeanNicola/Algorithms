@@ -1,0 +1,32 @@
+function PriorityQueue () {
+    this.collection = [];
+    this.printCollection = function() {
+      console.log(this.collection);
+    };
+    // Only change code below this line
+
+    this.size = function() {
+      return this.collection.length;
+    }
+
+    this.isEmpty = function() {
+      return this.size() ? false : true;
+    }
+
+    this.dequeue = function() {
+      return this.collection.shift()[0];
+    }
+
+    this.enqueue = function(item) { // [item, priority]
+
+      let index = 0;
+
+      for (var i = 0; i < this.size(); i++) {
+        if (this.collection[i][1] <= item[1]) index++;
+      }
+
+      this.collection.splice(index, 0, item);
+      return item[0];
+    }
+    // Only change code above this line
+}

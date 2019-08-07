@@ -1,0 +1,25 @@
+function smallestCommons(arr) {
+  
+  var commonMultiple = arr[0] * arr[1],
+      range = arr.slice().sort((a, b) => {return a - b;}),
+      loop = 1;
+
+  for (let i = range[0] + 1; i < range[1]; i++) { // fill the array
+    arr.splice(arr.length - 1, 0, i)
+  }
+
+  for (let i = 1; i < arr.length;i++) {  // find the smallest common multiple
+
+    if (i === 1) commonMultiple = (range[0] * range[1]) * loop;
+
+    if (commonMultiple % arr[i] !== 0) {
+      loop++;
+      i = 0;
+    }
+  }
+  
+  return commonMultiple;
+}
+
+
+smallestCommons([2, 10]);

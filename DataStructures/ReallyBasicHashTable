@@ -1,0 +1,65 @@
+var called = 0;
+var doHash = (string) => {
+  called++;
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) { hash += string.charCodeAt(i); }
+  return hash;
+};
+
+
+var HashTable = function() {
+  this.collection = {};
+  // change code below this line
+  this.calculateHash = function(key) {
+    
+    var hash = doHash(key);
+    var loop = 0;
+    
+    while (this.collection[hash] && this.collection[hash]['key'] !== key) {
+      hash += 1;
+    }
+
+    return hash;
+  }
+  
+  this.size = function() {
+    return Object.keys(this.collection).length;
+  }
+  
+  this.add = function(key, value) {
+    
+    var hash = this.calculateHash(key);
+    var entry = {
+      key: key,
+      value: value
+    }
+    
+    this.collection[hash] = entry;
+    
+  }
+  
+  this.lookup = function(key) {
+    
+    var hash = this.calculateHash(key);
+
+    if (!this.collection[hash]){
+      return null;
+    }
+    
+    return this.collection[hash].value;
+    
+  }
+  // change code above this line
+  
+  this.remove = function(key) {
+    
+    var value = this.lookup(key);
+    
+    if (value) {
+      var hash = this.calculateHash(key);
+      delete this.collection[hash];
+    }
+    
+    return value;
+  }
+};

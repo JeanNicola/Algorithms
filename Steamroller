@@ -1,0 +1,16 @@
+function steamrollArray(arr) {
+  
+  var flattenArray = []
+  
+  for (var i = 0; i < arr.length;i++) {
+    
+    if (Array.isArray(arr[i])) {flattenArray.push(...steamrollArray(arr[i]));}
+    else flattenArray.push(arr[i]);
+    
+  }
+  
+  return flattenArray;
+  
+}
+
+console.log(steamrollArray([1, [2], [3, [[4]]]]));

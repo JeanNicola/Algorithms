@@ -1,0 +1,19 @@
+function sumAll(arr) {
+
+  var orderArr = [Math.min(...arr), Math.max(...arr)],
+      sum = 0;
+
+  for (var i = orderArr[0]; i < orderArr[orderArr.length - 1]; i++) {
+    console.log(i)
+    if (i !== orderArr[0]) orderArr.splice(orderArr.length - 1, 0, i);
+  }
+
+  
+  orderArr.forEach(function(num) {
+    sum += num;
+  })
+  
+  return sum;
+}
+
+sumAll([5, 10]);

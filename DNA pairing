@@ -1,0 +1,21 @@
+function pairElement(str) {
+  
+  var strArr = str.split('');
+  var pairsArr = [];
+  var pairs = {
+    G: 'C',
+    C: 'G',
+    A: 'T',
+    T: 'A'
+  };
+  
+  for (var i = 0; i < strArr.length; i++) {
+    pairsArr.push([strArr[i]]);
+    pairsArr[i].push(pairs[strArr[i]]);
+    
+  }
+  
+  return pairsArr;
+}
+
+pairElement("GCG");

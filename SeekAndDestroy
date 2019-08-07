@@ -1,0 +1,17 @@
+function destroyer(arr) {
+  
+  var argumentsToFilter = Object.values(arguments).slice();
+  argumentsToFilter.shift();
+  
+  for (var i = 0; i < argumentsToFilter.length; i++) {
+    if (arr.includes(argumentsToFilter[i])) {
+      arr = arr.filter(function(number) {
+        return number !== argumentsToFilter[i];
+      });
+    }
+  } 
+
+  return arr;
+} 
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);

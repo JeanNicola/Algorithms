@@ -1,0 +1,16 @@
+function truncateString(str, num) {
+
+  if (num >= str.length) return str;
+
+  var result = str.split('')
+  result.splice(num, 0, '...');
+  
+  return result.slice(0, (num + 1)).join('');
+}
+
+truncateString("A-tisket a-tasket A green and yellow basket", 8);
+
+----- Additional information
+
+BiO Notation: O(1)
+Time Complexity: Constant

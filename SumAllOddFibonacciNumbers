@@ -1,0 +1,37 @@
+function sumFibs(num) {
+  
+  var fibonacciNumbers = [1, 1];
+  var lastFibonacciNumber;
+  var penulFibonacciNumber;
+  
+  updateFibonacciNumbers();
+  
+  while (lastFibonacciNumber !== 'stop') {
+    
+    var genFibonacciNumber = lastFibonacciNumber + penulFibonacciNumber;
+    
+    if (genFibonacciNumber <= num) {
+      fibonacciNumbers.push(genFibonacciNumber);
+    } else {
+      fibonacciNumbers.push('stop')
+    }
+    
+    updateFibonacciNumbers();
+
+  }
+  
+  fibonacciNumbers.pop();
+  
+  // method strongly attached to the scope of the function sumFibs
+  function updateFibonacciNumbers() {
+    lastFibonacciNumber = fibonacciNumbers[fibonacciNumbers.length - 1];
+    penulFibonacciNumber = fibonacciNumbers[fibonacciNumbers.length - 2];
+  }
+  
+  return fibonacciNumbers
+            .filter((num) => num % 2 !== 0)
+            .reduce((a, b) => a + b, 0);
+}
+
+sumFibs(105721);
+

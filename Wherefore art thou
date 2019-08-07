@@ -1,0 +1,31 @@
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  // Only change code below this line
+  
+  for (var i = 0; i < collection.length; i++) {
+    
+    let push = true;
+    
+    for (var prop in source) {
+      
+      if (source[prop] !== collection[i][prop]) {
+        push = false;
+      }
+      
+    } // end of source loop
+    
+    if (push) arr.push(collection[i]);
+    
+  } // end of collection loop  
+  
+  // Only change code above this line
+  return arr;
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+----- Additional information
+
+BiO Notation: O(n*a) // where "n" is the length of the collection and "a" the length of the source
+Time Complexity: Linear

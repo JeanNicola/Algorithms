@@ -1,0 +1,19 @@
+
+function bubbleSort(array) {
+  
+  for (var i = 0; i < array.length;i++) {
+    for (var j = i + 1; j < array.length;j++) {
+      if (array[j] < array[i]) swap(i, j);
+    }
+  }
+  
+  function swap(index1, index2) {
+    var temp = array[index1];
+    array[index1] = array[index2];
+    array[index2] = temp;
+  }
+
+  return array;
+}
+
+// In worst cases its has quadratic time complexity O(n^2)

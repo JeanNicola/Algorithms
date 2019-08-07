@@ -1,0 +1,26 @@
+function convertHTML(str) {
+  
+  var result = [];
+  var entities = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    '\'': '&apos;'
+  }
+  
+  for (var i = 0; i < str.split('').length; i++) {
+    
+    if ( Object.keys(entities).includes(str.split('')[i]) ) {
+      result.push(entities[str.split('')[i]]);
+    } else {
+      result.push(str.split('')[i]);
+    }
+    
+  }
+  
+  return result.join('');
+  
+}
+
+convertHTML("Schindler's List");

@@ -1,0 +1,29 @@
+function spinalCase(str) {
+
+  var lettersArr = str.split('');
+  var workArray = [];
+  
+  for (var i = 0; i < lettersArr.length;i++) {
+    
+    if (lettersArr[i] === lettersArr[i].toUpperCase() && 
+        i !== 0 && workArray[workArray.length - 1] !== '-') {
+      
+      workArray.push('-');
+    }
+    
+    if (lettersArr[i].toUpperCase() !== lettersArr[i].toLowerCase()) {
+      workArray.push(lettersArr[i].toLowerCase());
+    }
+    
+  }
+  
+  return workArray.join('');
+
+}
+
+spinalCase('The_Andy_Griffith-Show');
+
+----- Additional information
+
+BiO Notation: O(n) // where "n" is the length of the str
+Time Complexity: Linear

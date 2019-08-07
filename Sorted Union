@@ -1,0 +1,19 @@
+function uniteUnique(arr) {
+  
+  var arraysToJoin = Object.values(arguments),
+      valuesObject = {},
+      sortedUnion = [];
+      
+  for  (var i = 0; i < arraysToJoin.length; i++) {
+    for (var j = 0; j < arraysToJoin[i].length; j++) {
+      if (!valuesObject[arraysToJoin[i][j]]) {
+        sortedUnion.push(arraysToJoin[i][j])
+        valuesObject[arraysToJoin[i][j]] = 1;
+      }
+    }
+  }
+  
+  return sortedUnion;
+}
+
+uniteUnique([1, 3, 2], [1, [5]], [2, [4]]);

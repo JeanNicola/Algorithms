@@ -1,0 +1,51 @@
+function translatePigLatin(str) {
+  
+  if (!hasVowels(str)) return str + 'ay';
+  
+  if (startsWithVowel(str)) {
+    return str + 'way';
+  }
+  
+  str = str.split('');
+  str.push(str[0]);
+  str.shift();
+  str = str.join('');
+  
+  if (!startsWithVowel(str)) {
+    return translatePigLatin(str);
+  }
+  
+  return str + 'ay';
+  
+}
+
+function startsWithVowel(str) {
+  
+  var vowels = ['a', 'e', 'i', 'o', 'u'],
+      firstLetter = str[0];
+  
+  for (var  i = 0; i < vowels.length; i++) {
+    if (firstLetter === vowels[i]) {
+      return true
+    }
+  }
+  
+  return false
+  
+}
+
+function hasVowels(str) {
+  
+  var vowels = ['a', 'e', 'i', 'o', 'u'];
+  
+  for (var  i = 0; i < vowels.length; i++) {
+    if (str.split('').includes(vowels[i])) {
+      return true
+    }
+  }
+  
+  return false;
+  
+}
+
+translatePigLatin("glove");

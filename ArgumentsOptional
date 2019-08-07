@@ -1,0 +1,27 @@
+function addTogether() {
+  
+  var args = Array.from(arguments);
+  var sum = 0;
+  
+  // Function with Clousure
+  function makeASum(num) {
+    if (typeof num !== 'number') return undefined;
+    return args[0] + num;
+  }
+  // ---
+  
+  if (args.length === 1) {
+    if (typeof args[0] !== 'number') return undefined;
+    return makeASum;
+  }
+  
+  for (var i = 0; i < args.length;i++) {
+    if (typeof args[i] !== 'number') return undefined;
+    sum += args[i];
+  }
+  
+  return sum;
+}
+
+addTogether(2)(3);
+

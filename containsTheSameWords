@@ -1,0 +1,45 @@
+function containsTheSameLetters(word1, word2) {
+  
+  if (word1.length !== word2.length) return false;
+  
+  var lettersObjectFW = createALettersObject(word1.toLowerCase());
+  var lettersObjectSW = createALettersObject(word2.toLowerCase());
+  var lettersObjectLengthFW = Object.keys(lettersObjectFW).length;
+  var lettersObjectLengthSW = Object.keys(lettersObjectSW).length;
+  
+
+  if (lettersObjectLengthFW != lettersObjectLengthSW) return false;
+  
+
+  for (var prop in lettersObjectFW) {
+    if (lettersObjectSW[prop] !== lettersObjectFW[prop]) return false;
+  }
+  
+  return true;
+  
+}
+
+function createALettersObject(word) {
+  
+  var lettersObject = {};
+  
+    for(var i = 0; i < word.length; i++) {
+    if (!lettersObject[word[i]]) {
+      lettersObject[word[i]] = 1
+    } else {
+      lettersObject[word[i]] = lettersObject[word[i]] + 1;
+    }
+  }
+  
+  return lettersObject;
+}
+
+containsTheSameLetters("mmmbbvvamaii", "vivimmbmmaab")
+
+----- Additional information
+
+BiO Notation: O(n*a) // where "n" is the length of the first word and "a" the length of the second word
+Time Complexity: Linear
+
+
+

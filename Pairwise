@@ -1,0 +1,17 @@
+function pairwise(arr, arg) {
+  
+  var sum = 0;
+  var indexsInUse = []
+  
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = (i + 1); j < arr.length; j++) {
+      let hasBeenUsed = indexsInUse.includes(i) || indexsInUse.includes(j);
+      if (arr[i] + arr[j] === arg && !hasBeenUsed) {
+        indexsInUse.push(...[i, j]);
+        sum += (i + j);
+      };
+    }
+  }
+  
+  return sum;
+}
