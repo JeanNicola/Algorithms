@@ -1,0 +1,114 @@
+var Node = function(data) {
+  this.data = data;
+  this.prev = null;
+  this.next = null;
+};
+var DoublyLinkedList = function() {
+  this.head = null;
+  this.tail = null;
+  // change code below this line
+
+  this.add = function(data) {
+
+    let node = new Node(data);
+    
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+      return data;
+    }
+
+    var currentNode = this.head;
+
+    while (currentNode.next) {
+      currentNode = currentNode.next;
+    }
+
+    currentNode.next = node;
+    node.prev = currentNode;
+
+    this.tail = node;
+
+    return data;
+  }
+
+  this.remove = function(data) {
+
+    if (this.head === null) return null;
+
+    var currentNode = this.head;
+    var previousNode = null;
+    var wasFound = false;
+    
+    while(currentNode.next && currentNode.data !== data) {
+      previousNode = currentNode;
+      currentNode =  currentNode.next;
+    }
+
+    if (currentNode.data === data) wasFound = true;
+    if (!wasFound) return null;
+    
+    if (currentNode === this.head && currentNode === this.tail) {
+
+      this.head = this.tail = null;
+
+    } else if (currentNode === this.head) {
+
+      this.head = currentNode.next;
+      this.head.prev = null;
+
+    } else if (currentNode === this.tail) {
+
+      this.tail = this.tail.prev;
+      this.tail.next = null;
+
+    } else {
+
+      previousNode.next = currentNode.next;
+      currentNode.next.prev = previousNode;
+
+    }
+    
+    this.remove(data);
+
+    return data;
+  }
+  // change code above this line
+  
+  this.getHead = function() {
+    return this.head;
+  }
+  
+  this.getTail = function() {
+    return this.tail;
+  }
+  
+  
+  this.reverse = function(node = this.head) {
+
+    if (!node) return null;
+    
+    let temp = node.prev ? Object.assign(node.prev) : null;
+    
+    node.prev = node.next;
+    node.next = temp;
+    
+    if (node.next === null) this.tail = node;
+    if (node.prev === null) this.head = node;
+    
+    this.reverse(node.prev);
+
+  }
+  
+};
+
+
+var list = new DoublyLinkedList();
+
+list.add('firstElement');
+list.add('secondElement');
+list.add('thirdElement');
+list.reverse();
+
+console.log(list.getTail());
+
