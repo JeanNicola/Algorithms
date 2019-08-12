@@ -1,0 +1,33 @@
+function findTheLongestSubString(string) {
+  
+  var observed = {};
+  var maxLength = 0;
+  
+  for (var i = 0; i < string.length;i++) {
+
+    if (observed[string[i]] >= 0) {
+      
+      var length = string.substring(0, i).length;
+      string = string.substring(observed[string[i]], string.length);
+      
+      i = 0;
+      
+      observed = {}; // reset the observed values 
+      
+      if (length > maxLength) maxLength = length;
+      
+    }
+    
+    observed[string[i]] = i + 1;
+    
+    if (i === (string.length - 1) && string.length > maxLength) {
+      maxLength = string.length;
+    }
+    
+  }
+  
+  return maxLength;
+  
+}
+
+console.log(findTheLongestSubString("dvdf"))
