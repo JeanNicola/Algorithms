@@ -1,0 +1,25 @@
+function findPairSum(array, sum) {
+  
+  var numbers = {};
+  var pairs = []
+  
+  for (var i = 0; i < array.length; i++) {
+    if (numbers[array[i]] >= 0) {
+      
+      pairs.push([array[i], array[numbers[array[i]]]])
+      delete numbers[array[i]]
+      
+    } else {
+      numbers[sum - array[i]] = i;
+    }
+
+  }
+  
+  return pairs;
+    
+}
+
+
+console.log(findPairSum([1, 2, 3, 4, 5, 6, 1], 8));
+
+// O(n);
