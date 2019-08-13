@@ -31,3 +31,50 @@ function findTheLongestSubString(string) {
 }
 
 console.log(findTheLongestSubString("dvdf"))
+
+
+// ---------------------- VERSION OF THE SAME ALGORITHM IN O(N)
+
+var lengthOfLongestSubstring = function(string) {
+    
+  var observed = {};
+  var sequence = "";
+  var indexStabilizer = 0;
+  var maxLength = 0;
+  
+  for (var i = 0; i < string.length;i++) {
+    
+    var sequenceIndex = observed[string[i]] - indexStabilizer;
+    var hasBeenObserved = typeof observed[string[i]] === 'number';
+    var length;
+
+    if (hasBeenObserved && sequence[sequenceIndex - 1] === string[i]) {
+      cutSequence(sequenceIndex)
+    }
+    
+    observed[string[i]] = (i + 1)
+    sequence = sequence + string[i];
+    length = sequence.length;
+    
+    if (length > maxLength) maxLength = length;
+    
+    if (i === string.length - 1 && hasBeenObserved) {
+      cutSequence(sequenceIndex)
+    }
+  }
+  
+  function cutSequence(sequenceIndex) {
+   
+    var length = sequence.length;
+    indexStabilizer += sequenceIndex ;
+    sequence = sequence.substring(sequenceIndex, sequence.length);
+    
+    if (length > maxLength) maxLength = length;
+    
+    delete observed[string[i]];
+    
+  }
+  
+  return maxLength;
+
+};
