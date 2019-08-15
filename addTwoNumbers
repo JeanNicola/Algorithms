@@ -1,0 +1,83 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function(l1, l2) {
+    
+    if (!l1 && !l2) return null;
+    
+    let values = {
+        l1: getArrayFromLinkedList(l1),
+        l2: getArrayFromLinkedList(l2),
+        result: []
+    },
+        largestArr = (values.l1.length > values.l2.length) ? 'l1' : 'l2',
+        lowestArr = (values.l1.length > values.l2.length) ? 'l2' : 'l1',
+        carry = 0;
+
+    for (let i = 0; i < values[largestArr].length; i++) {
+        
+        if (!values[lowestArr][i]) values[lowestArr][i] = 0;
+            
+        let sum = values[largestArr][i] + values[lowestArr][i] + carry;
+        carry = 0;
+            
+        if (sum >= 10) {
+            carry += parseInt(sum.toString()[0]);
+            values.result.push(parseInt(sum.toString()[1]));
+        } else {
+            values.result.push(sum);
+        }
+
+    }
+    
+    if (carry > 0) values.result.push(carry);
+    
+    return getLinkedListFromArray(values.result);
+    
+}
+
+function getArrayFromLinkedList(linkedListHead) {
+    
+    if(!linkedListHead) [];
+    
+    let currentNode = linkedListHead,
+        values = [linkedListHead.val];
+    
+    
+    while(currentNode.next) {
+        
+        currentNode = currentNode.next;
+        values.push(currentNode.val)
+        
+    }
+    
+    return values;
+    
+}
+
+function getLinkedListFromArray(array) {
+    
+    if (array.length === 0) return new ListNode(null);
+    
+    let head = new ListNode(array[0]),
+        currentNode = head;
+    
+    array.shift();
+    
+    array.forEach(value => {
+        let node = new ListNode(value);
+        currentNode.next = node;
+        currentNode = currentNode.next;
+    })
+    
+    return head;
+}
