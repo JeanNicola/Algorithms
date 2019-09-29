@@ -1,0 +1,87 @@
+
+var subMenu1 = {
+  AA: {
+    'AAA': {
+      type: 'resumen'
+    },
+    'AAB': {
+      type: 'nii activo'
+    },
+    'AAC': {
+      type: 'nii pasivo'
+    }
+  },
+  
+  AB: {
+    'ABA': {
+      type: 'en pesos'
+    },
+    'ABB': {
+      type: 'en dolares'
+    }
+  }
+}
+
+var mainMenu = {
+  'A':{
+    'AA': {
+       type: 'clientes',
+       menu: subMenu1.AA
+    },
+    'AB': {
+       type: 'grupo economico',
+       menu: subMenu1.AB
+    },
+    'AC': {
+       type: 'rm'
+    },
+    'AD': {
+       type: 'team'
+    },
+    'AE': {
+       type: 'gerenia'
+    },
+     'AF': {
+       type:'coverage'
+    },
+    'AG': {
+       type: 'coverage china'
+    },
+    'AH': {
+       type: 'prospect'
+    }
+  }
+}
+
+var rootMenu = {
+  type: 'landing',
+  'A': {
+    type: 'clientes',
+    menu: mainMenu.A
+  },
+  'B': {
+    type: 'producto'
+  },
+  'C': {
+    type: 'contactos'
+  }
+}
+
+
+function findMenuNameByDeep(deep) {
+  
+  var option = rootMenu;
+  var pathString = 'landing'
+  
+  for (var i = 0; i < deep.length; i++) {
+     if (option.menu) option = option.menu;
+     option = option[deep.substring(0, (i + 1))]
+     pathString += ' / ' + option.type;
+  }
+  console.log(pathString)
+  
+  return option;
+  
+}
+
+console.log(findMenuNameByDeep('ABB'))
