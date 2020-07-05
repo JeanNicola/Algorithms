@@ -1,0 +1,32 @@
+
+
+function dfs(graph, root, visited, result = []) {
+  
+  if (!visited) {
+    visited = {};
+    
+    for (let i = 0; i < graph.length;i++) {
+      visited[i] = false;
+    }
+    
+  }
+  
+  visited[root] = true;
+  result.push(root);
+ 
+  
+  for (let i = 0; i < graph.length; i++) {
+
+    if (i != root && graph[root][i] == 1 && !visited[i]) {
+       result = [...result, ...dfs(graph, i, visited)];
+    }
+  }
+  
+  return result;
+
+}
+
+var exDFSGraph = [
+[0, 1, 0, 0], [1, 0, 1, 0], [0, 1, 0, 0], [0, 0, 0, 0]
+];
+console.log(dfs(exDFSGraph, 3));

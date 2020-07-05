@@ -1,0 +1,29 @@
+
+-- ADD FUNCTION
+
+  this.add = (value, currentNode = new Node()) => {
+
+    if (this.root == null) {
+      this.root = new Node(value); return;
+    }
+
+    let direction = null;
+
+    if (!currentNode.value && currentNode.value != 0) {
+      direction = value <= this.root.value ? 'left' : 'right'
+      currentNode = this.root;
+    } else {
+      direction = value <= currentNode.value ? 'left': 'right'
+    }
+
+    if (currentNode.value == value) {
+      return null;
+    }
+
+    if (!currentNode[direction]) {
+      currentNode[direction] = new Node(value); 
+    } else {
+      return this.add(value, currentNode[direction]);
+    }
+
+  }

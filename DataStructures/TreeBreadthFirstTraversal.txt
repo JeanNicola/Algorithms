@@ -1,0 +1,82 @@
+
+function Node(value) {
+  
+  this.value = value;
+  this.left = null;
+  this.right = null;
+  
+}
+
+function BinarySearchTree() {
+  
+  this.root = null;
+  
+  this.breadthFirstTraversal = (nodes = [this.root], history = []) => {
+    
+    if (this.root == null) return null;
+    
+    var childs = []
+
+    nodes.forEach((node) => {
+      
+      history.push(node.value)
+      
+      if (node.left != null) childs.push(node.left);
+      
+      if (node.right != null) childs.push(node.right);
+      
+    })
+    
+    if (childs.length > 0) return this.breadthFirstTraversal(childs, history);
+    
+    if (childs.length == 0) return history;
+    
+  }
+  
+   this.add = (value, currentNode = new Node()) => {
+
+     if (this.root == null) {
+       this.root = new Node(value); return;
+     }
+
+     let direction = null;
+
+     if (!currentNode.value && currentNode.value != 0) {
+       direction = value <= this.root.value ? 'left' : 'right'
+       currentNode = this.root;
+     } else {
+       direction = value <= currentNode.value ? 'left': 'right'
+     }
+
+     if (currentNode.value == value) {
+       return null;
+     }
+
+     if (!currentNode[direction]) {
+       currentNode[direction] = new Node(value); 
+     } else {
+       return this.add(value, currentNode[direction]);
+     }
+
+  }
+   
+}
+
+
+// EXAMPLE
+
+
+let myTree = new BinarySearchTree();
+
+myTree.add(35);
+myTree.add(28);
+myTree.add(40);
+myTree.add(20);
+myTree.add(30);
+myTree.add(20);
+myTree.add(39);
+myTree.add(45);
+myTree.add(19);
+myTree.add(21);
+
+console.log(myTree.breadthFirstTraversal());

@@ -1,0 +1,49 @@
+
+let bfs = (graph, root) => {
+  
+  
+  let nodesLen = {};
+  
+  for (let i = 0; i < graph.length;i++) {
+    nodesLen[i] = Infinity;
+  }
+  
+  nodesLen[root] = 0;
+  let queue = [root];
+  
+  while (queue.length != 0) {
+    
+    let current = queue.shift();
+    
+    let neighborsIndexes = [];
+    let neightborIndex = graph[current].indexOf(1);
+    
+    while (neightborIndex != -1) {
+      neighborsIndexes.push(neightborIndex);
+      neightborIndex = graph[current].indexOf(1,neightborIndex + 1);
+    }
+    
+    for ( let j = 0; j < neighborsIndexes.length; j++){
+      if (nodesLen[neighborsIndexes[j]] == Infinity){ // This line we haven't set the distance from the nodesLen[neighborIdx[j]] yet so we will set now. 
+        nodesLen[neighborsIndexes[j]] = nodesLen[current] + 1
+        queue.push(neighborsIndexes[j]); // We push the neighbor to the queue so the next time we go through the while loop, we will check the neighbors of that node too.
+      }
+    }
+    
+  }
+  
+  return nodesLen;
+  
+}
+
+
+let exBFSGraph = [
+  [0,1,1,1,0],
+  [0,0,1,0,0],
+  [1,1,0,0,0],
+  [0,0,0,1,0],
+  [0,1,0,0,0]
+]
+
+console.log(bfs(exBFSGraph, 1));
+

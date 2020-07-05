@@ -1,0 +1,17 @@
+
+function Node(value) {
+  
+  this.value = value;
+  this.left = null;
+  this.right = null;
+  
+}
+
+function BinarySearchTree() {
+  
+  this.root = null;
+   
+}
+
+
+let myTree = new BinarySearchTree();

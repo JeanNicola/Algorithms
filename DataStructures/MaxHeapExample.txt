@@ -1,0 +1,94 @@
+
+var MaxHeap = function() {
+
+  this.values = [];
+  
+  // change code below this line
+  
+  this.insert = (value) => {
+    
+    if (!value) return null;
+    
+    this.values.push(value);
+    
+    if (this.values.length == 1) return value;
+    
+    let currentValueIndex = this.values.length - 1;
+    let parentValueIndex = Math.floor((currentValueIndex - 1) / 2)
+    
+    while (this.values[currentValueIndex] > this.values[parentValueIndex] && currentValueIndex != 0) {
+      
+      let temp = this.values[parentValueIndex];
+      
+      this.values[parentValueIndex] = this.values[currentValueIndex];
+      this.values[currentValueIndex] = temp;
+
+      
+      currentValueIndex = parentValueIndex;
+      parentValueIndex = Math.floor((currentValueIndex - 1) / 2);
+      
+    }
+    
+    return value;
+    
+  }
+  
+  this.print = () => {
+    return this.values;
+  }
+
+ this.delete = () => {
+    
+    if (this.values.length == 0) return null;
+    
+    if (this.values.length == 1) return this.values.shift();
+    
+    let removedValue = this.values.shift();
+    
+    this.values.unshift(this.values.pop());
+    
+    let currentValueIndex = 0;
+    let leftChildIndex  =  (2 * currentValueIndex + 1);
+    let rightChildIndex =  (2 * currentValueIndex + 2);
+    
+    while (currentValueIndex != this.values.length - 1) {
+
+      let maxValueInChild = Math.max(this.values[leftChildIndex], this.values[rightChildIndex]);
+      
+      let greaterChildIndex = maxValueInChild == this.values[leftChildIndex] ? leftChildIndex : maxValueInChild == this.values[rightChildIndex] ? rightChildIndex : null;
+      let lessChildIndex =    maxValueInChild != this.values[leftChildIndex] ? leftChildIndex : maxValueInChild != this.values[rightChildIndex] ? rightChildIndex : null;
+      
+      if (greaterChildIndex && this.values[greaterChildIndex] > this.values[currentValueIndex]) {
+        
+        let temp = this.values[greaterChildIndex];
+        
+        this.values[greaterChildIndex] = this.values[currentValueIndex];
+        this.values[currentValueIndex] = temp;
+        
+        currentValueIndex = greaterChildIndex;
+        
+      } else if (lessChildIndex && this.values[lessChildIndex] > this.values[currentValueIndex]) {
+      
+        let temp = this.values[lessChildIndex];
+        
+        this.values[lessChildIndex] = this.values[currentValueIndex];
+        this.values[currentValueIndex] = temp;
+        
+        currentValueIndex = lessChildIndex;
+        
+      } else {
+        break;
+      }
+      
+      leftChildIndex  =  (2 * currentValueIndex + 1);
+      rightChildIndex =  (2 * currentValueIndex + 2);
+     
+    }
+
+    return removedValue;
+    
+  }
+  
+  // change code above this line
+  
+};
